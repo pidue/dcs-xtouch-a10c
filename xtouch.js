@@ -93,27 +93,33 @@ var XTouch = function () {
         value: 1
     });
 
-    // spengo tutti i led
-    for (var note in notesToButtons)
-        output.send('noteon', {
-            channel: 0,
-            note: note,
-            velocity: 0
-        });
+    this.reset = function () {
+        // spengo tutti i led
+        for (var note in notesToButtons) {
+            output.send('noteon', {
+                channel: 0,
+                note: note,
+                velocity: 0
+            });
+        }
+        for (var note in notesToLayer) {
+            output.send('noteon', {
+                channel: 0,
+                note: note,
+                velocity: 0
+            });
+        }
 
-    for (var note in notesToLayer)
-        output.send('noteon', {
-            channel: 0,
-            note: note,
-            velocity: 127
-        });
+        for (var controller in knobLedsToContorller) {
+            output.send('cc', {
+                channel: 0,
+                controller: controller,
+                value: 0
+            });
+        }
+    }
 
-    for (var controller in knobLedsToContorller)
-        output.send('cc', {
-            channel: 0,
-            controller: controller,
-            value: 0
-        });
+    this.reset()
 
     // listener per bottoni e knob up/down
     input.on('noteon', msg => {
@@ -176,7 +182,7 @@ var XTouch = function () {
             if (currentPage) {
                 currentPage.emit(`knob_${controllerToKnob[msg.controller]}_turn`, controllerToKnob[msg.controller], delta, knobState[controllerToKnob[msg.controller]])
                 currentPage.emit('knob_turn', controllerToKnob[msg.controller], delta, knobState[controllerToKnob[msg.controller]])
-                currentPage.emit('msg', 'knob_turn', controllerToKnob[msg.controller], delta, knobState[controllerToKnob[msg.controller]])                
+                currentPage.emit('msg', 'knob_turn', controllerToKnob[msg.controller], delta, knobState[controllerToKnob[msg.controller]])
             }
             this.emit(`knob_${controllerToKnob[msg.controller]}_turn`, controllerToKnob[msg.controller], delta, knobState[controllerToKnob[msg.controller]])
             this.emit('knob_turn', controllerToKnob[msg.controller], delta, knobState[controllerToKnob[msg.controller]])
@@ -197,7 +203,7 @@ var XTouch = function () {
         }
     });
 
-    var setCurrentPage = function(button)  {
+    var setCurrentPage = function (button) {
         if (pages[button]) {
             currentPage = pages[button]
 
@@ -221,10 +227,11 @@ var XTouch = function () {
     };
 
     this.close = function () {
+        this.reset();
         input.close();
         output.close();
     };
-    
+
 }
 
 XTouch.prototype = Object.create(EventEmitter.prototype);
