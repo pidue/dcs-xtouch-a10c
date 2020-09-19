@@ -8,7 +8,7 @@
   "author": "Paolo Ferracin <paolo.ferracin@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "easymidi": "^1.0.1",
-    "dcs-bios-api": "latest"
+    "dcs-bios-api": "latest",
+    "easymidi": "^1.1.2"
   }
 }

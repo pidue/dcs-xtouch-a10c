@@ -25,37 +25,26 @@ const fmRadioPage = xtouch.addPageButton(4)
 
 hsiPage.on('knob_1_turn', (knob, delta, pushed) => {
   api.sendMessage(`HSI_HDG_KNOB ${delta * 320 * (pushed ? 10 : 1)}\n`);
-  console.log(`HSI_HDG_KNOB ${delta * 320 * (pushed ? 10 : 1)}`);
 });
 
 hsiPage.on('knob_2_turn', (knob, delta, pushed) => {
   api.sendMessage(`HSI_CRS_KNOB ${delta * 320 * (pushed ? 10 : 1)}\n`);
-  console.log(`HSI_CRS_KNOB ${delta * 320 * (pushed ? 10 : 1)}`);
 });
-
-hsiPage.on("button_4_down", () => {
-  console.log("Button 4 down")
-})
-
 
 amRadioPage.on('knob_1_turn', (knob, delta, pushed) => {
   api.sendMessage(`VHFAM_FREQ1 ${delta > 0 ? 'INC' : 'DEC'}\n`);
-  console.log(`VHFAM_FREQ1 ${delta > 0 ? 'INC' : 'DEC'}`);
 });
 
 amRadioPage.on('knob_2_turn', (knob, delta, pushed) => {
   api.sendMessage(`VHFAM_FREQ2 ${delta > 0 ? 'INC' : 'DEC'}\n`);
-  console.log(`VHFAM_FREQ2 ${delta > 0 ? 'INC' : 'DEC'}`);
 });
 
 amRadioPage.on('knob_3_turn', (knob, delta, pushed) => {
   api.sendMessage(`VHFAM_FREQ3 ${delta > 0 ? 'INC' : 'DEC'}\n`);
-  console.log(`VHFAM_FREQ3 ${delta > 0 ? 'INC' : 'DEC'}`);
 });
 
 amRadioPage.on('knob_4_turn', (knob, delta, pushed) => {
   api.sendMessage(`VHFAM_FREQ4 ${delta > 0 ? 'INC' : 'DEC'}\n`);
-  console.log(`VHFAM_FREQ4 ${delta > 0 ? 'INC' : 'DEC'}`);
 });
 
 
