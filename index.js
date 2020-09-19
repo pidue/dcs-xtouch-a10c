@@ -22,14 +22,47 @@ const hsiPage = xtouch.addPageButton(1)
 const amRadioPage = xtouch.addPageButton(2)
 const uhfRadioPage = xtouch.addPageButton(3)
 const fmRadioPage = xtouch.addPageButton(4)
+const lightsPage = xtouch.addPageButton(5)
 
 hsiPage.on('knob_1_turn', (knob, delta, pushed) => {
   api.sendMessage(`HSI_HDG_KNOB ${delta * 320 * (pushed ? 10 : 1)}\n`);
 });
-
 hsiPage.on('knob_2_turn', (knob, delta, pushed) => {
   api.sendMessage(`HSI_CRS_KNOB ${delta * 320 * (pushed ? 10 : 1)}\n`);
 });
+
+hsiPage.on('knob_3_turn', (knob, delta, pushed) => {
+  api.sendMessage(`ALT_SET_PRESSURE ${delta * 320 * (pushed ? 10 : 1)}\n`);
+  console.log(`ALT_SET_PRESSURE ${delta * 320 * (pushed ? 10 : 1)}`);
+});
+
+hsiPage.on('knob_4_turn', (knob, delta, pushed) => {
+  api.sendMessage(`CMSP_MODE  ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`CMSP_MODE  ${delta > 0 ? 'INC' : 'DEC'}\n`);
+});
+
+hsiPage.on('knob_5_turn', (knob, delta, pushed) => {
+  api.sendMessage(`TACAN_10 ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`TACAN_10 ${delta > 0 ? 'INC' : 'DEC'}\n`);
+});
+hsiPage.on('knob_6_turn', (knob, delta, pushed) => {
+  api.sendMessage(`TACAN_1 ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`TACAN_1 ${delta > 0 ? 'INC' : 'DEC'}\n`);
+});
+hsiPage.on('knob_6_up', (knob, delta, pushed) => {
+  api.sendMessage(`TACAN_XY TOGGLE\n`);
+  console.log(`TACAN_XY TOGGLE\n`);
+});
+
+hsiPage.on('knob_7_turn', (knob, delta, pushed) => {
+  api.sendMessage(`ILS_MHZ  ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`ILS_MHZ ${delta > 0 ? 'INC' : 'DEC'}\n`);
+});
+hsiPage.on('knob_8_turn', (knob, delta, pushed) => {
+  api.sendMessage(`ILS_KHZ ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`ILS_KHZ ${delta > 0 ? 'INC' : 'DEC'}\n`);
+});
+
 
 amRadioPage.on('knob_1_turn', (knob, delta, pushed) => {
   api.sendMessage(`VHFAM_FREQ1 ${delta > 0 ? 'INC' : 'DEC'}\n`);
@@ -48,6 +81,58 @@ amRadioPage.on('knob_4_turn', (knob, delta, pushed) => {
 });
 
 
+
+uhfRadioPage.on('knob_1_turn', (knob, delta, pushed) => {
+  api.sendMessage(`UHF_100MHZ_SEL ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`UHF_100MHZ_SEL ${delta > 0 ? 'INC' : 'DEC'}`);
+});
+
+uhfRadioPage.on('knob_2_turn', (knob, delta, pushed) => {
+  api.sendMessage(`UHF_10MHZ_SEL ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`UHF_10MHZ_SEL ${delta > 0 ? 'INC' : 'DEC'}`);
+});
+
+uhfRadioPage.on('knob_3_turn', (knob, delta, pushed) => {
+  api.sendMessage(`UHF_1MHZ_SEL ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`UHF_1MHZ_SEL ${delta > 0 ? 'INC' : 'DEC'}`);
+});
+
+uhfRadioPage.on('knob_4_turn', (knob, delta, pushed) => {
+  api.sendMessage(`UHF_POINT1MHZ_SEL ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`UHF_POINT1MHZ_SEL ${delta > 0 ? 'INC' : 'DEC'}`);
+});
+
+uhfRadioPage.on('knob_4_turn', (knob, delta, pushed) => {
+  api.sendMessage(`UHF_POINT25_SEL ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`UHF_POINT25_SEL ${delta > 0 ? 'INC' : 'DEC'}`);
+});
+
+uhfRadioPage.on('knob_5_turn', (knob, delta, pushed) => {
+  api.sendMessage(`UHF_PRESET_SEL ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`UHF_PRESET_SEL ${delta > 0 ? 'INC' : 'DEC'}`);
+});
+
+
+
+fmRadioPage.on('knob_1_turn', (knob, delta, pushed) => {
+  api.sendMessage(`VHFFM_FREQ1 ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`VHFFM_FREQ1 ${delta > 0 ? 'INC' : 'DEC'}`);
+});
+
+fmRadioPage.on('knob_2_turn', (knob, delta, pushed) => {
+  api.sendMessage(`VHFFM_FREQ2 ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`VHFFM_FREQ2 ${delta > 0 ? 'INC' : 'DEC'}`);
+});
+
+fmRadioPage.on('knob_3_turn', (knob, delta, pushed) => {
+  api.sendMessage(`VHFFM_FREQ3 ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`VHFFM_FREQ3 ${delta > 0 ? 'INC' : 'DEC'}`);
+});
+
+fmRadioPage.on('knob_4_turn', (knob, delta, pushed) => {
+  api.sendMessage(`VHFFM_FREQ4 ${delta > 0 ? 'INC' : 'DEC'}\n`);
+  console.log(`VHFFM_FREQ4 ${delta > 0 ? 'INC' : 'DEC'}`);
+});
 
  
 
